@@ -150,8 +150,8 @@ class LumiList(object):
 
     def __and__(self, other): # Things in both
         result = {}
-        aruns = set(self.compactList.keys())
-        bruns = set(other.compactList.keys())
+        aruns = set(list(self.compactList.keys()))
+        bruns = set(list(other.compactList.keys()))
         for run in aruns & bruns:
             lumiList = []                    # List for this run
             unique = []                    # List for this run
@@ -183,7 +183,7 @@ class LumiList(object):
         result = {}
         aruns = self.compactList.keys()
         bruns = other.compactList.keys()
-        runs = set(aruns + bruns)
+        runs = set(list(aruns) + list(bruns))
         for run in runs:
             overlap = sorted(self.compactList.get(run, []) + other.compactList.get(run, []))
             unique = [copy.deepcopy(overlap[0])]
@@ -246,7 +246,7 @@ class LumiList(object):
         """
         theList = []
         runs = self.compactList.keys()
-        runs = sorted(run, key=int)
+        runs = sorted(runs, key=int)
         for run in runs:
             lumis = self.compactList[run]
             for lumiPair in sorted(lumis):
